@@ -34,7 +34,8 @@ public class HistorianHysteriaInput {
         }
 
         for (String line : lines) {
-            String[] lineParts = line.trim().split("\\s+");
+            String cleanLine = line.replaceAll("^[\\uFEFF]+", "").trim();  // Remove BOM (if any) and trim whitespace
+            String[] lineParts = cleanLine.split("\\s+");
             if (lineParts.length >= 2) {
                 try {
                     list1.add(Integer.parseInt(lineParts[0]));

@@ -1,0 +1,38 @@
+# Ignore bin and obj directories
+**/bin/
+**/obj/
+
+# Ignore IDE and user-specific files
+.vs/
+.vscode/
+.idea/
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+
+# Ignore the user-specific project files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Ignore Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Ignore the package directory (for NuGet)
+.nuget/
+
+# Ignore compiled files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.bak
+
+# Ignore configuration files
+appsettings.json
