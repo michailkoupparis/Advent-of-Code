@@ -20,7 +20,7 @@ namespace Advent_Of_Code_2024_.Net.Day2
             int safeReportsCount = 0;
             foreach (var report in reports)
             {
-                if (checkReportSafety(report))
+                if (checkReportSafetyWithOneMistake(report, true))
                 {
                     safeReportsCount++;
                 }
@@ -38,44 +38,15 @@ namespace Advent_Of_Code_2024_.Net.Day2
         public static int GetSafeReportsWithProblemDamper(List<List<int>> reports)
         {
             int safeRepotsCount = 0;
-            List<List<int>> safeReports = new List<List<int>>();
             foreach (var report in reports)
             {
                 if (checkReportSafetyWithOneMistake(report, false))
                 {
-                    safeReports.Add(report);
                     safeRepotsCount++;
                 }
             }
 
-            foreach (var r in safeReports)
-            {
-                Console.WriteLine(string.Join(' ', r));
-            }
             return safeRepotsCount;
-        }
-
-        private static bool checkReportSafety(List<int> report)
-        {
-            int reportLength = report.Count;
-            if (reportLength == 0 || reportLength == 1)
-            {
-                return true;
-            }
-
-            int isIncreasingFactor = report[0] < report[1] ? 1 : -1;
-            bool isSafe = true;
-            for (int i = 0; i < reportLength - 1; i++)
-            {
-                int reportDiff = isIncreasingFactor * (report[i + 1] - report[i]);
-                if (reportDiff < 1 || reportDiff > 3)
-                {
-                    isSafe = false;
-                    break;
-                }
-            }
-
-            return isSafe;
         }
 
         private static bool checkReportSafetyWithOneMistake(List<int> report, bool isMistakeHappened, int? isIncreasingFactor = null)
@@ -118,13 +89,13 @@ namespace Advent_Of_Code_2024_.Net.Day2
                         return true;
                     }
 
-                    List<int> option2 = new List<int>();
+                    List<int> optionSkipCurrent = new List<int>();
                     if (i-1 >= 0)
                     {
-                        option2.Add(report[i - 1]);
+                        optionSkipCurrent.Add(report[i - 1]);
                     }
                     bool skipCurrent = checkReportSafetyWithOneMistake(
-                        option2.Concat(report.GetRange(i + 1, reportLength - i - 1)).ToList(),
+                        optionSkipCurrent.Concat(report.GetRange(i + 1, reportLength - i - 1)).ToList(),
                         true,
                         i - 1 == 0 ? null : isIncreasingFactor);
 
