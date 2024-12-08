@@ -15,7 +15,7 @@ namespace Advent_Of_Code_2024_.Net.Day1
         /// <param name="list1"></param>
         /// <param name="list2"></param>
         /// <returns></returns>
-        public static int calculateDistance(List<int> list1, List<int> list2)
+        public static int CalculateDistance(List<int> list1, List<int> list2)
         {
             list1.Sort();
             list2.Sort();
@@ -35,7 +35,7 @@ namespace Advent_Of_Code_2024_.Net.Day1
         /// <param name="list1"></param>
         /// <param name="list2"></param>
         /// <returns></returns>
-        public static int calculateSimilarity(List<int> list1, List<int> list2)
+        public static int CalculateSimilarity(List<int> list1, List<int> list2)
         {
             Dictionary<int, int> countList1 = HelperFunctions.GetCountDictionary(list1);
             Dictionary<int, int> countList2 = HelperFunctions.GetCountDictionary(list2);
