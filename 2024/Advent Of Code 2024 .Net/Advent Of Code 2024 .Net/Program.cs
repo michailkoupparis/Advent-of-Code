@@ -2,6 +2,7 @@
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
+using Advent_Of_Code_2024_.Net.Day5;
 
 namespace Advent_Of_Code_2024_.Net
 {
@@ -12,7 +13,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay1();
             //checkDay2();
             //checkDay3();
-            checkDay4();
+            //checkDay4();
+            checkDay5();
         }
 
         private static void checkDay1()
@@ -77,6 +79,24 @@ namespace Advent_Of_Code_2024_.Net
 
             result = CeresSearch.CoutXshapeMAS(input);
             Console.WriteLine(result);
+        }
+
+        private static void checkDay5()
+        {
+            var inputExample = new PrintQueueInput("Day5/example_input.txt");
+            int resultExmaple = PrintQueue.GetAdditionOfMiddleSafetyProtocols(inputExample.Protocols, inputExample.PageOrderingRules);
+            Console.WriteLine(resultExmaple);
+
+            var input = new PrintQueueInput("Day5/input.txt");
+            int result = PrintQueue.GetAdditionOfMiddleSafetyProtocols(input.Protocols, input.PageOrderingRules);
+            Console.WriteLine(result);
+
+            resultExmaple = PrintQueue.CorrectUnsafePagesAndGetMiddleAddition(inputExample.Protocols, inputExample.PageOrderingRules);
+            Console.WriteLine(resultExmaple);
+
+            result = PrintQueue.CorrectUnsafePagesAndGetMiddleAddition(input.Protocols, input.PageOrderingRules);
+            Console.WriteLine(result);
+
         }
     }
 }

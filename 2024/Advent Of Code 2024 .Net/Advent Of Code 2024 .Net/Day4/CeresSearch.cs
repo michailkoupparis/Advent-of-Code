@@ -87,6 +87,12 @@ namespace Advent_Of_Code_2024_.Net.Day4
             return count;
         }
 
+
+        /// <summary>
+        /// Part 2 of the Ceres Search Task
+        /// </summary>
+        /// <param name="xmasText"></param>
+        /// <returns></returns>
         public static int CoutXshapeMAS(string[] xmasText)
         {
             string mas_mas = "MMASS";
