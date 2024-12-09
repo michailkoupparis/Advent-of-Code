@@ -1,6 +1,7 @@
 ﻿using Advent_Of_Code_2024_.Net.Day1;
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
+using Advent_Of_Code_2024_.Net.Day4;
 
 namespace Advent_Of_Code_2024_.Net
 {
@@ -10,7 +11,8 @@ namespace Advent_Of_Code_2024_.Net
         {
             //checkDay1();
             //checkDay2();
-            checkDay3();
+            //checkDay3();
+            checkDay4();
         }
 
         private static void checkDay1()
@@ -58,6 +60,22 @@ namespace Advent_Of_Code_2024_.Net
             Console.WriteLine(resultExmaple);
 
             result = MullItOver.CheckMulAndAddResultsWithEnabled(input.CorruptedString);
+            Console.WriteLine(result);
+        }
+
+        private static void checkDay4()
+        {
+            int resultExmaple = CeresSearch.CountXmas(CeresSearchInput.ExampleInput);
+            Console.WriteLine(resultExmaple);
+
+            var input = CeresSearchInput.GetInput("Day4/input.txt");
+            int result = CeresSearch.CountXmas(input);
+            Console.WriteLine(result);
+
+            resultExmaple = CeresSearch.CoutXshapeMAS(CeresSearchInput.ExampleInput);
+            Console.WriteLine(resultExmaple);
+
+            result = CeresSearch.CoutXshapeMAS(input);
             Console.WriteLine(result);
         }
     }
