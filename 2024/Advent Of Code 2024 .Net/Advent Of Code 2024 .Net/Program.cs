@@ -3,6 +3,7 @@ using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
 using Advent_Of_Code_2024_.Net.Day5;
+using Advent_Of_Code_2024_.Net.Day6;
 
 namespace Advent_Of_Code_2024_.Net
 {
@@ -14,7 +15,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay2();
             //checkDay3();
             //checkDay4();
-            checkDay5();
+            //checkDay5();
+            checkDay6();
         }
 
         private static void checkDay1()
@@ -98,5 +100,24 @@ namespace Advent_Of_Code_2024_.Net
             Console.WriteLine(result);
 
         }
+
+
+        private static void checkDay6()
+        {
+            var inputExample = new GuardGallivantInput("Day6/example_input.txt");
+            int resultExmaple = GuardGallivant.CountSafePosts(inputExample.Room);
+            Console.WriteLine(resultExmaple);
+
+            var input = new GuardGallivantInput("Day6/input.txt");
+            int result = GuardGallivant.CountSafePosts(input.Room);
+            Console.WriteLine(result);
+
+            //resultExmaple = GuardGallivant.CountPossibleLoopObstacles(inputExample.Room);
+            //Console.WriteLine(resultExmaple);
+
+            result = GuardGallivant.CountPossibleLoopObstacles(input.Room);
+            Console.WriteLine(result);
+        }
+
     }
 }

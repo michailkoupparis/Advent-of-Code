@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using Advent_Of_Code_2024_.Net.Helpers;
+using System.Xml;
 
 namespace Advent_Of_Code_2024_.Net.Day4
 {
@@ -142,26 +143,16 @@ namespace Advent_Of_Code_2024_.Net.Day4
             return count;
         }
 
-
-        private class GridPoint
-        {
-            public int X { get; set; }
-            public int Y { get; set; }
-        }
-
         private static int checkIndices(string[] xmasTexts, string checkText, GridPoint[] points)
         {
             int i = 0;
             foreach (char c in checkText)
             {
-                if (points[i].X > xmasTexts.Length - 1
-                 || points[i].X < 0
-                 || points[i].Y > xmasTexts[points[i].X].Length - 1
-                 || points[i].Y < 0)
+                if(!points[i].CheckGridBoundary(xmasTexts))
                 {
                     return 0;
                 }
-
+                
                 if (xmasTexts[points[i].X][points[i].Y] != c)
                 {
                     return 0;
