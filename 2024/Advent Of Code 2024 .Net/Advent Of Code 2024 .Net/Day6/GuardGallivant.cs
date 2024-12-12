@@ -66,48 +66,71 @@ namespace Advent_Of_Code_2024_.Net.Day6
         /// <returns></returns>
         public static int CountSafePosts(string[] room)
         {
-
-            GridPoint guardLocation = findGuardLocation(room);
-            if (guardLocation == null)
-            {
-                throw new Exception("Guard was not found room");
-            }
-
-            char guardDirection = room[guardLocation.X][guardLocation.Y];
-            HashSet<GridPoint> passedGridPoints = new HashSet<GridPoint> { guardLocation };
-            while (true)
-            {
-
-                GridPoint nextLocation = getNextLocation(guardLocation, guardDirection);
-                if (!nextLocation.CheckGridBoundary(room))
-                {
-                    break;
-                }
-
-                if (room[nextLocation.X][nextLocation.Y] == OBSTACLE)
-                {
-                    guardDirection = getNewDirection(guardDirection);
-                    continue;
-                }
-
-                passedGridPoints.Add(nextLocation);
-                guardLocation.X = nextLocation.X;
-                guardLocation.Y = nextLocation.Y;
-
-            };
-
+            HashSet<GridPoint> passedGridPoints = findPassedPoints(room);
             return passedGridPoints.Count;
         }
 
         /// <summary>
         /// For part 2 of the Guard Gallivant task
+        /// This solution tries to check for loops as we go
         /// </summary>
         /// <param name="room"></param>
         /// <returns></returns>
         /// 
         public static int CountPossibleLoopObstacles(string[] room)
         {
+            HashSet<GridPoint> passedGridPoints = findPassedPoints(room);
+            HashSet<GridPoint> possibleObstacles = new HashSet<GridPoint>();
 
+            foreach (GridPoint point in passedGridPoints) {
+                string[] roomCopy = room.ToArray();
+                updateRoom(roomCopy, point, OBSTACLE);
+
+                GridPoint guardLocation = new GridPoint() { X = passedGridPoints.First().X, Y = passedGridPoints.First().Y };
+                char guardDirection = room[guardLocation.X][guardLocation.Y];
+                Dictionary<GridPoint, HashSet<char>> newLoopPoints = new Dictionary<GridPoint, HashSet<char>>();
+                updatePassedPointsAndDirection(newLoopPoints, guardLocation, guardDirection);
+                while (true)
+                {
+                    GridPoint nextLocation = getNextLocation(guardLocation, guardDirection);
+                    if (!nextLocation.CheckGridBoundary(room))
+                    {
+                        break;
+                    }
+
+                    if (roomCopy[nextLocation.X][nextLocation.Y] == OBSTACLE)
+                    {
+                        guardDirection = getNewDirection(guardDirection);
+                        continue;
+                    }
+
+                    if (newLoopPoints.ContainsKey(nextLocation) && newLoopPoints[nextLocation].Contains(guardDirection))
+                    {
+                        possibleObstacles.Add(new GridPoint() { X = point.X, Y = point.Y });
+                        break;
+                    }
+
+                    guardLocation.X = nextLocation.X;
+                    guardLocation.Y = nextLocation.Y;
+                    updatePassedPointsAndDirection(newLoopPoints, guardLocation, guardDirection);
+
+                };
+
+            }            
+
+            return possibleObstacles.Count;
+
+        }
+
+        /// <summary>
+        /// For part 2 of the Guard Gallivant task
+        /// This solution tries to check for loops as we go
+        /// </summary>
+        /// <param name="room"></param>
+        /// <returns></returns>
+        /// 
+        public static int CountPossibleLoopObstaclesAsWeGo(string[] room)
+        {
             GridPoint guardLocation = findGuardLocation(room);
             if (guardLocation == null)
             {
@@ -118,7 +141,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
             int countPossibleLoopObs = 0;
             HashSet<GridPoint> foundObstacles = new HashSet<GridPoint>();
             Dictionary<GridPoint, HashSet<char>> passedGridPoints = new Dictionary<GridPoint, HashSet<char>>();
-            updatePassedointsAndDirection(passedGridPoints, guardLocation, guardDirection);
+            updatePassedPointsAndDirection(passedGridPoints, guardLocation, guardDirection);
             while (true)
             {
                 GridPoint nextLocation = getNextLocation(guardLocation, guardDirection);
@@ -141,25 +164,61 @@ namespace Advent_Of_Code_2024_.Net.Day6
 
                 guardLocation.X = nextLocation.X;
                 guardLocation.Y = nextLocation.Y;
-                updatePassedointsAndDirection(passedGridPoints, guardLocation, guardDirection);
+                updatePassedPointsAndDirection(passedGridPoints, guardLocation, guardDirection);
 
             };
 
-            foreach (GridPoint point in foundObstacles.OrderBy(pair => pair.X).ThenBy(pair => pair.Y).ToList())
-            {
-                Console.WriteLine(point);
-            }
             return countPossibleLoopObs;
+        }
+
+        private static HashSet<GridPoint> findPassedPoints(string[] room)
+        {
+            GridPoint guardLocation = findGuardLocation(room);
+            if (guardLocation == null)
+            {
+                throw new Exception("Guard was not found room");
+            }
+
+            char guardDirection = room[guardLocation.X][guardLocation.Y];
+            HashSet<GridPoint> passedGridPoints = new HashSet<GridPoint> { new GridPoint() { X = guardLocation.X, Y = guardLocation.Y } };
+            while (true)
+            {
+
+                GridPoint nextLocation = getNextLocation(guardLocation, guardDirection);
+                if (!nextLocation.CheckGridBoundary(room))
+                {
+                    break;
+                }
+
+                if (room[nextLocation.X][nextLocation.Y] == OBSTACLE)
+                {
+                    guardDirection = getNewDirection(guardDirection);
+                    continue;
+                }
+
+                passedGridPoints.Add(nextLocation);
+                guardLocation.X = nextLocation.X;
+                guardLocation.Y = nextLocation.Y;
+
+            };
+
+            return passedGridPoints;
         }
 
         private static bool checkLoop(string[] room, Dictionary<GridPoint, HashSet<char>> passedPoints, GridPoint location, char direction)
         {
 
             GridPoint prevPoint = new GridPoint() { X = location.X, Y = location.Y };
-            Dictionary<GridPoint, HashSet<char>> loopPoints = passedPoints.ToDictionary(
-                    entry => new GridPoint { X = entry.Key.X, Y = entry.Key.Y },
-                    entry => new HashSet<char>(entry.Value)
-            );
+            Dictionary<GridPoint, HashSet<char>> loopPoints = new Dictionary<GridPoint, HashSet<char>>();
+            foreach(GridPoint point in passedPoints.Keys)
+            {
+                var directions = new HashSet<char>();
+                foreach(char c in passedPoints[point])
+                {
+                    directions.Add(c);
+                }
+                loopPoints.Add(new GridPoint() { X = point.X, Y = point.Y}, directions);
+            }
 
             char trialDirection = getNewDirection(direction);
             while (true)
@@ -181,7 +240,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
                     return true;
                 }
 
-                updatePassedointsAndDirection(loopPoints, trialPoint, trialDirection);
+                updatePassedPointsAndDirection(loopPoints, trialPoint, trialDirection);
                 prevPoint.X = trialPoint.X;
                 prevPoint.Y = trialPoint.Y;
 
@@ -189,8 +248,8 @@ namespace Advent_Of_Code_2024_.Net.Day6
 
             return false;
         }
-
-        private static void updatePassedointsAndDirection(Dictionary<GridPoint, HashSet<char>> passedPoints, GridPoint point, char direction)
+        
+        private static void updatePassedPointsAndDirection(Dictionary<GridPoint, HashSet<char>> passedPoints, GridPoint point, char direction)
         {
             if (passedPoints.ContainsKey(point))
             {

@@ -112,8 +112,8 @@ namespace Advent_Of_Code_2024_.Net
             int result = GuardGallivant.CountSafePosts(input.Room);
             Console.WriteLine(result);
 
-            //resultExmaple = GuardGallivant.CountPossibleLoopObstacles(inputExample.Room);
-            //Console.WriteLine(resultExmaple);
+            resultExmaple = GuardGallivant.CountPossibleLoopObstacles(inputExample.Room);
+            Console.WriteLine(resultExmaple);
 
             result = GuardGallivant.CountPossibleLoopObstacles(input.Room);
             Console.WriteLine(result);
