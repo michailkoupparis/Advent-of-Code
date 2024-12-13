@@ -41,6 +41,19 @@ namespace Advent_Of_Code_2024_.Net.Helpers
             return false;
         }
 
+        public static bool operator ==(GridPoint obj1, GridPoint obj2)
+        {
+            if (ReferenceEquals(obj1, null) || ReferenceEquals(obj2, null))
+                return false;
+
+            return obj1.X == obj2.X && obj1.Y == obj2.Y;
+        }
+
+        public static bool operator !=(GridPoint obj1, GridPoint obj2)
+        {
+            return !(obj1 == obj2);
+        }
+
         public override int GetHashCode()
         {
             return HashCode.Combine(X, Y);

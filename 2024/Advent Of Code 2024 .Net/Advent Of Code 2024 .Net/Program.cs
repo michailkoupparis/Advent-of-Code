@@ -4,6 +4,8 @@ using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
 using Advent_Of_Code_2024_.Net.Day5;
 using Advent_Of_Code_2024_.Net.Day6;
+using Advent_Of_Code_2024_.Net.Day7;
+using Advent_Of_Code_2024_.Net.Day8;
 
 namespace Advent_Of_Code_2024_.Net
 {
@@ -16,7 +18,9 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay3();
             //checkDay4();
             //checkDay5();
-            checkDay6();
+            //checkDay6();
+            //checkDay7();
+            checkDay8();
         }
 
         private static void checkDay1()
@@ -101,7 +105,6 @@ namespace Advent_Of_Code_2024_.Net
 
         }
 
-
         private static void checkDay6()
         {
             var inputExample = new GuardGallivantInput("Day6/example_input.txt");
@@ -119,5 +122,38 @@ namespace Advent_Of_Code_2024_.Net
             Console.WriteLine(result);
         }
 
+        private static void checkDay7()
+        {
+            var inputExample = new BridgeRepairInput("Day7/example_input.txt");
+            long resultExmaple = BridgeRepair.SumValidEquations(inputExample.EquationItems, false);
+            Console.WriteLine(resultExmaple);
+
+            var input = new BridgeRepairInput("Day7/input.txt");
+            long result = BridgeRepair.SumValidEquations(input.EquationItems, false);
+            Console.WriteLine(result);
+
+            resultExmaple = BridgeRepair.SumValidEquations(inputExample.EquationItems, true);
+            Console.WriteLine(resultExmaple);
+
+            result = BridgeRepair.SumValidEquations(input.EquationItems, true);
+            Console.WriteLine(result);
+        }
+
+        private static void checkDay8()
+        {
+            var inputExample = new ResonantCollinearityInput("Day8/example_input.txt");
+            int resultExmaple = ResonantCollinearity.CountAndinodes(inputExample.AntenaGrid, false);
+            Console.WriteLine(resultExmaple);
+
+            var input = new ResonantCollinearityInput("Day8/input.txt");
+            int result = ResonantCollinearity.CountAndinodes(input.AntenaGrid, false);
+            Console.WriteLine(result);
+
+            resultExmaple = ResonantCollinearity.CountAndinodes(inputExample.AntenaGrid, true);
+            Console.WriteLine(resultExmaple);
+
+            result = ResonantCollinearity.CountAndinodes(input.AntenaGrid, true);
+            Console.WriteLine(result);
+        }
     }
 }
