@@ -6,6 +6,7 @@ using Advent_Of_Code_2024_.Net.Day5;
 using Advent_Of_Code_2024_.Net.Day6;
 using Advent_Of_Code_2024_.Net.Day7;
 using Advent_Of_Code_2024_.Net.Day8;
+using Advent_Of_Code_2024_.Net.Day9;
 
 namespace Advent_Of_Code_2024_.Net
 {
@@ -20,7 +21,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay5();
             //checkDay6();
             //checkDay7();
-            checkDay8();
+            //checkDay8();
+            checkDay9();
         }
 
         private static void checkDay1()
@@ -153,6 +155,22 @@ namespace Advent_Of_Code_2024_.Net
             Console.WriteLine(resultExmaple);
 
             result = ResonantCollinearity.CountAndinodes(input.AntenaGrid, true);
+            Console.WriteLine(result);
+        }
+
+        private static void checkDay9()
+        {
+            long resultExmaple = DiskFragmenter.GetArrangedFilesCheckSum("2333133121414131402");
+            Console.WriteLine(resultExmaple);
+
+            var input = new DiskFragmenterInput("Day9/input.txt");
+            long result = DiskFragmenter.GetArrangedFilesCheckSum(input.DISK);
+            Console.WriteLine(result);
+
+            resultExmaple = DiskFragmenter.GetArrangedFilesTogetherCheckSum("2333133121414131402");
+            Console.WriteLine(resultExmaple);
+
+            result = DiskFragmenter.GetArrangedFilesTogetherCheckSum(input.DISK);
             Console.WriteLine(result);
         }
     }
