@@ -27,6 +27,14 @@ namespace Advent_Of_Code_2024_.Net.Helpers
                 && Y >= 0;
         }
 
+        public bool CheckGridBoundary(int[][] grid)
+        {
+            return X <= grid.Length - 1
+                && X >= 0
+                && Y <= grid[X].Length - 1
+                && Y >= 0;
+        }
+
         public override string ToString()
         {
             return $"({X}, {Y})";

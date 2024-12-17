@@ -1,4 +1,5 @@
 ﻿using Advent_Of_Code_2024_.Net.Day1;
+using Advent_Of_Code_2024_.Net.Day10;
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
@@ -22,7 +23,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay6();
             //checkDay7();
             //checkDay8();
-            checkDay9();
+            //checkDay9();
+            checkDay10();
         }
 
         private static void checkDay1()
@@ -171,6 +173,23 @@ namespace Advent_Of_Code_2024_.Net
             Console.WriteLine(resultExmaple);
 
             result = DiskFragmenter.GetArrangedFilesTogetherCheckSum(input.DISK);
+            Console.WriteLine(result);
+        }
+
+        private static void checkDay10()
+        {
+            var inputExample = new HoofItInput("Day10/example_input.txt");
+            int resultExmaple = HoofIt.CalculateTrailheadScores(inputExample.HikingTrails);
+            Console.WriteLine(resultExmaple);
+
+            var input = new HoofItInput("Day10/input.txt");
+            int result = HoofIt.CalculateTrailheadScores(input.HikingTrails);
+            Console.WriteLine(result);
+
+            resultExmaple = HoofIt.CalculateTrailheadRatings(inputExample.HikingTrails);
+            Console.WriteLine(resultExmaple);
+
+            result = HoofIt.CalculateTrailheadRatings(input.HikingTrails);
             Console.WriteLine(result);
         }
     }
