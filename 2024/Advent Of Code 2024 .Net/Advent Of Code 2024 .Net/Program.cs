@@ -1,5 +1,6 @@
 ﻿using Advent_Of_Code_2024_.Net.Day1;
 using Advent_Of_Code_2024_.Net.Day10;
+using Advent_Of_Code_2024_.Net.Day11;
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
@@ -24,7 +25,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay7();
             //checkDay8();
             //checkDay9();
-            checkDay10();
+            //checkDay10();
+            checkDay11();
         }
 
         private static void checkDay1()
@@ -190,6 +192,21 @@ namespace Advent_Of_Code_2024_.Net
             Console.WriteLine(resultExmaple);
 
             result = HoofIt.CalculateTrailheadRatings(input.HikingTrails);
+            Console.WriteLine(result);
+        }
+
+        private static void checkDay11()
+        {
+            var inputExample = new List<long> { 125, 17 };
+            long resultExmaple = PlutonianPebbles.GetPebblesAfterBlink(inputExample, 25);
+            Console.WriteLine(resultExmaple);
+
+            var input = new List<long> { 17639, 47, 3858, 0, 470624, 9467423, 5, 188 };
+            long result = PlutonianPebbles.GetPebblesAfterBlinkRecursive(input.ToList(), 25);
+            Console.WriteLine(result);
+
+
+            result = PlutonianPebbles.GetPebblesAfterBlinkRecursiveMemo(input.ToList(), 75);
             Console.WriteLine(result);
         }
     }
