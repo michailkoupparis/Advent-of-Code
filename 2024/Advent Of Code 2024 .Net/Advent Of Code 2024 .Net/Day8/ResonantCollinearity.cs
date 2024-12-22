@@ -41,11 +41,11 @@ namespace Advent_Of_Code_2024_.Net.Day8
                             {
                                 if (checkWholeLine)
                                 {
-                                    addAntitodesThroughLine(antenaGrid, antenaPositions, new GridPoint() { X = i1, Y = j1 }, new GridPoint() { X = i2, Y = j2 });
+                                    addAntitodesThroughLine(antenaGrid, antenaPositions, new GridPoint(i1, j1), new GridPoint(i2, j2));
                                 }
                                 else
                                 {
-                                    addAntitodesBeforeAfter(antenaGrid, antenaPositions, new GridPoint() { X = i1, Y = j1 }, new GridPoint() { X = i2, Y = j2 });
+                                    addAntitodesBeforeAfter(antenaGrid, antenaPositions, new GridPoint(i1, j1), new GridPoint(i2, j2));
                                 }
                             }
 
@@ -69,17 +69,17 @@ namespace Advent_Of_Code_2024_.Net.Day8
 
             int minX = firstPoint.X - xDiff;
             int minY = firstPoint.Y - yDiff;
-            GridPoint minPoint = new GridPoint() { X = minX, Y = minY };
+            GridPoint minPoint = new GridPoint(minX, minY);
 
             int maxX = secondPoint.X + xDiff;
             int maxY = secondPoint.Y + yDiff;
-            GridPoint maxPoint = new GridPoint() { X = maxX, Y = maxY };
+            GridPoint maxPoint = new GridPoint(maxX, maxY);
 
             foreach (GridPoint p in new GridPoint[] { minPoint, maxPoint })
             {
                 if (p.CheckGridBoundary(antenaGrid))
                 {
-                    antidotes.Add(new GridPoint() { X = p.X, Y = p.Y });
+                    antidotes.Add(new GridPoint(p.X, p.Y));
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace Advent_Of_Code_2024_.Net.Day8
                 {
                     if (y != antena1.Y && y != antena2.Y)
                     {
-                        antidotes.Add(new GridPoint() { X = antena1.X, Y = y });
+                        antidotes.Add(new GridPoint(antena1.X, y));
                     }
                 }
                 return;
@@ -106,7 +106,7 @@ namespace Advent_Of_Code_2024_.Net.Day8
                 {
                     if (x != antena1.X && x != antena2.X)
                     {
-                        antidotes.Add(new GridPoint() { X = x, Y = antena1.Y });
+                        antidotes.Add(new GridPoint(x, antena1.Y));
                     }
                 }
                 return;
@@ -123,10 +123,10 @@ namespace Advent_Of_Code_2024_.Net.Day8
                 double yD = slope * x + interCept;
                 if (tryGetExactInt(yD, out y))
                 {
-                    GridPoint gridPoint = new GridPoint() { X = (int)x, Y = y };
+                    GridPoint gridPoint = new GridPoint((int)x, y);
                     if (gridPoint.CheckGridBoundary(antenaGrid))
                     {
-                        antidotes.Add(new GridPoint() { X = gridPoint.X, Y = gridPoint.Y });
+                        antidotes.Add(new GridPoint(gridPoint.X, gridPoint.Y));
                     }
                 }                
             }

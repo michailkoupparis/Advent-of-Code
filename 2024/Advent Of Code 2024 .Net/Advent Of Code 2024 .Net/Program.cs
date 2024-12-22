@@ -1,6 +1,7 @@
 ﻿using Advent_Of_Code_2024_.Net.Day1;
 using Advent_Of_Code_2024_.Net.Day10;
 using Advent_Of_Code_2024_.Net.Day11;
+using Advent_Of_Code_2024_.Net.Day12;
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
@@ -26,7 +27,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay8();
             //checkDay9();
             //checkDay10();
-            checkDay11();
+            //checkDay11();
+            checkDay12();
         }
 
         private static void checkDay1()
@@ -207,6 +209,37 @@ namespace Advent_Of_Code_2024_.Net
 
 
             result = PlutonianPebbles.GetPebblesAfterBlinkRecursiveMemo(input.ToList(), 75);
+            Console.WriteLine(result);
+        }
+
+        private static void checkDay12()
+        {
+            long resultExample = GardenGroups.CalculateFenceCostPerimeter(GardenGroupsInput.Example1.Plots);
+            Console.WriteLine(resultExample);
+            resultExample = GardenGroups.CalculateFenceCostPerimeter(GardenGroupsInput.Example2.Plots);
+            Console.WriteLine(resultExample);
+
+            string[] exampleInput = new GardenGroupsInput("Day12/example_input.txt").Plots;
+            resultExample = GardenGroups.CalculateFenceCostPerimeter(exampleInput);
+            Console.WriteLine(resultExample);
+
+            string[] input = new GardenGroupsInput("Day12/input.txt").Plots;
+            long result = GardenGroups.CalculateFenceCostPerimeter(input);
+            Console.WriteLine(result);
+
+            resultExample = GardenGroups.CalculateFenceCostSides(GardenGroupsInput.Example1.Plots);
+            Console.WriteLine(resultExample);
+            resultExample = GardenGroups.CalculateFenceCostSides(GardenGroupsInput.Example2.Plots);
+            Console.WriteLine(resultExample);
+            resultExample = GardenGroups.CalculateFenceCostSides(GardenGroupsInput.Example3.Plots);
+            Console.WriteLine(resultExample);
+            resultExample = GardenGroups.CalculateFenceCostSides(GardenGroupsInput.Example4.Plots);
+            Console.WriteLine(resultExample);
+
+            resultExample = GardenGroups.CalculateFenceCostSides(exampleInput);
+            Console.WriteLine(resultExample);
+
+            result = GardenGroups.CalculateFenceCostSides(input);
             Console.WriteLine(result);
         }
     }

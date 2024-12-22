@@ -35,7 +35,7 @@ namespace Advent_Of_Code_2024_.Net.Day10
                     if (topographicMap[i][j] == 0)
                     {
                         bool[,] visited = new bool[rows, cols];
-                        int score = countReachableNines(topographicMap, new GridPoint() { X = i, Y =j}, 0, visited);
+                        int score = countReachableNines(topographicMap, new GridPoint(i,j), 0, visited);
                         totalScore += score;
                     }
                 }
@@ -65,7 +65,7 @@ namespace Advent_Of_Code_2024_.Net.Day10
                     if (topographicMap[i][j] == 0)
                     {
                         bool[,] visited = new bool[rows, cols];
-                        int score = countReachableNines(topographicMap, new GridPoint() { X = i, Y = j }, 0);
+                        int score = countReachableNines(topographicMap, new GridPoint(i, j) , 0);
                         totalScore += score;
                     }
                 }
@@ -90,7 +90,7 @@ namespace Advent_Of_Code_2024_.Net.Day10
             {
                 int nx = point.X + dx[dir];
                 int ny = point.Y + dy[dir];
-                count += countReachableNines(topographicMap, new GridPoint() { X = nx, Y = ny }, currentHeight + 1);
+                count += countReachableNines(topographicMap, new GridPoint(nx, ny), currentHeight + 1);
             }
 
             return count;
@@ -114,7 +114,7 @@ namespace Advent_Of_Code_2024_.Net.Day10
             {
                 int nx = point.X + dx[dir];
                 int ny = point.Y + dy[dir];
-                count += countReachableNines(topographicMap, new GridPoint() { X = nx, Y = ny }, currentHeight + 1, visited);
+                count += countReachableNines(topographicMap, new GridPoint(nx, ny), currentHeight + 1, visited);
             }
 
             return count;

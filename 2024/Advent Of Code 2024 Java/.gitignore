@@ -1,1 +1,5 @@
 /bin/
+
+#Ignore inputs
+*input.txt
+*example_input.txt

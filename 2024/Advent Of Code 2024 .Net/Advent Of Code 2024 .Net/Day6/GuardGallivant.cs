@@ -82,11 +82,12 @@ namespace Advent_Of_Code_2024_.Net.Day6
             HashSet<GridPoint> passedGridPoints = findPassedPoints(room);
             HashSet<GridPoint> possibleObstacles = new HashSet<GridPoint>();
 
-            foreach (GridPoint point in passedGridPoints) {
+            foreach (GridPoint point in passedGridPoints)
+            {
                 string[] roomCopy = room.ToArray();
                 updateRoom(roomCopy, point, OBSTACLE);
 
-                GridPoint guardLocation = new GridPoint() { X = passedGridPoints.First().X, Y = passedGridPoints.First().Y };
+                GridPoint guardLocation = new GridPoint(passedGridPoints.First().X, passedGridPoints.First().Y);
                 char guardDirection = room[guardLocation.X][guardLocation.Y];
                 Dictionary<GridPoint, HashSet<char>> newLoopPoints = new Dictionary<GridPoint, HashSet<char>>();
                 updatePassedPointsAndDirection(newLoopPoints, guardLocation, guardDirection);
@@ -106,7 +107,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
 
                     if (newLoopPoints.ContainsKey(nextLocation) && newLoopPoints[nextLocation].Contains(guardDirection))
                     {
-                        possibleObstacles.Add(new GridPoint() { X = point.X, Y = point.Y });
+                        possibleObstacles.Add(new GridPoint(point.X, point.Y));
                         break;
                     }
 
@@ -116,7 +117,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
 
                 };
 
-            }            
+            }
 
             return possibleObstacles.Count;
 
@@ -158,7 +159,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
 
                 if (!foundObstacles.Contains(nextLocation) && checkLoop(room, passedGridPoints, guardLocation, guardDirection))
                 {
-                    foundObstacles.Add(new GridPoint() { X = nextLocation.X, Y = nextLocation.Y });
+                    foundObstacles.Add(new GridPoint(nextLocation.X, nextLocation.Y));
                     countPossibleLoopObs++;
                 }
 
@@ -180,7 +181,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
             }
 
             char guardDirection = room[guardLocation.X][guardLocation.Y];
-            HashSet<GridPoint> passedGridPoints = new HashSet<GridPoint> { new GridPoint() { X = guardLocation.X, Y = guardLocation.Y } };
+            HashSet<GridPoint> passedGridPoints = new HashSet<GridPoint> { new GridPoint(guardLocation.X, guardLocation.Y) };
             while (true)
             {
 
@@ -208,16 +209,16 @@ namespace Advent_Of_Code_2024_.Net.Day6
         private static bool checkLoop(string[] room, Dictionary<GridPoint, HashSet<char>> passedPoints, GridPoint location, char direction)
         {
 
-            GridPoint prevPoint = new GridPoint() { X = location.X, Y = location.Y };
+            GridPoint prevPoint = new GridPoint(location.X, location.Y);
             Dictionary<GridPoint, HashSet<char>> loopPoints = new Dictionary<GridPoint, HashSet<char>>();
-            foreach(GridPoint point in passedPoints.Keys)
+            foreach (GridPoint point in passedPoints.Keys)
             {
                 var directions = new HashSet<char>();
-                foreach(char c in passedPoints[point])
+                foreach (char c in passedPoints[point])
                 {
                     directions.Add(c);
                 }
-                loopPoints.Add(new GridPoint() { X = point.X, Y = point.Y}, directions);
+                loopPoints.Add(new GridPoint(point.X, point.Y), directions);
             }
 
             char trialDirection = getNewDirection(direction);
@@ -248,16 +249,16 @@ namespace Advent_Of_Code_2024_.Net.Day6
 
             return false;
         }
-        
+
         private static void updatePassedPointsAndDirection(Dictionary<GridPoint, HashSet<char>> passedPoints, GridPoint point, char direction)
         {
             if (passedPoints.ContainsKey(point))
             {
-                passedPoints[new GridPoint() { X = point.X, Y = point.Y }].Add(direction);
+                passedPoints[new GridPoint(point.X, point.Y)].Add(direction);
             }
             else
             {
-                passedPoints.Add(new GridPoint() { X = point.X, Y = point.Y }, new HashSet<char> { direction });
+                passedPoints.Add(new GridPoint(point.X, point.Y), new HashSet<char> { direction });
             }
         }
 
@@ -280,7 +281,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
                         | room[i][j] == GUARD_SYMBOL_UP
                         )
                     {
-                        return new GridPoint() { X = i, Y = j };
+                        return new GridPoint(i, j);
                     }
                 }
             }
@@ -294,13 +295,13 @@ namespace Advent_Of_Code_2024_.Net.Day6
             switch (direction)
             {
                 case GUARD_SYMBOL_UP:
-                    return new GridPoint() { X = currLocation.X - 1, Y = currLocation.Y };
+                    return new GridPoint(currLocation.X - 1, currLocation.Y);
                 case GUARD_SYMBOL_RIGHT:
-                    return new GridPoint() { X = currLocation.X, Y = currLocation.Y + 1 };
+                    return new GridPoint(currLocation.X, currLocation.Y + 1);
                 case GUARD_SYMBOL_DOWN:
-                    return new GridPoint() { X = currLocation.X + 1, Y = currLocation.Y };
+                    return new GridPoint(currLocation.X + 1, currLocation.Y);
                 case GUARD_SYMBOL_LEFT:
-                    return new GridPoint() { X = currLocation.X, Y = currLocation.Y - 1 };
+                    return new GridPoint(currLocation.X, currLocation.Y - 1);
                 default:
                     throw new ArgumentException($"Unknow direction {direction}");
             }

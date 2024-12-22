@@ -11,6 +11,12 @@ namespace Advent_Of_Code_2024_.Net.Helpers
         public int X { get; set; }
         public int Y { get; set; }
 
+        public GridPoint(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
         public bool CheckGridBoundary(List<string> grid)
         {
             return X <= grid.Count - 1
@@ -35,6 +41,36 @@ namespace Advent_Of_Code_2024_.Net.Helpers
                 && Y >= 0;
         }
 
+        public bool CheckAdjacent(GridPoint gridPoint)
+        {
+            return (X == gridPoint.X - 1 && Y == gridPoint.Y) ||
+                   (X == gridPoint.X + 1 && Y == gridPoint.Y) ||
+                   (X == gridPoint.X && Y == gridPoint.Y - 1) ||
+                   (X == gridPoint.X && Y == gridPoint.Y + 1);
+        }
+
+        public GridPoint[] GetAdjacent()
+        {
+            return new GridPoint[]
+            {
+                  new GridPoint(X - 1, Y),
+                  new GridPoint(X + 1, Y),
+                  new GridPoint(X, Y - 1),
+                  new GridPoint(X, Y + 1),
+            };
+        }
+
+        public Tuple<CellBoundary, GridPoint>[] GetAdjacentWithDirection()
+        {
+            return new Tuple<CellBoundary, GridPoint>[]
+            {
+                  new Tuple<CellBoundary, GridPoint>(CellBoundary.UP, new GridPoint(X - 1, Y)),
+                  new Tuple<CellBoundary, GridPoint>(CellBoundary.DOWN, new GridPoint(X + 1, Y)),
+                  new Tuple<CellBoundary, GridPoint>(CellBoundary.LEFT, new GridPoint(X, Y - 1)),
+                  new Tuple<CellBoundary, GridPoint>(CellBoundary.RIGHT, new GridPoint(X, Y + 1))
+            };
+        }
+
         public override string ToString()
         {
             return $"({X}, {Y})";
@@ -48,6 +84,7 @@ namespace Advent_Of_Code_2024_.Net.Helpers
             }
             return false;
         }
+
 
         public static bool operator ==(GridPoint obj1, GridPoint obj2)
         {
