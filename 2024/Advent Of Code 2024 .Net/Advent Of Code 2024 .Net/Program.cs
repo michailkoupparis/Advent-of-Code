@@ -2,6 +2,7 @@
 using Advent_Of_Code_2024_.Net.Day10;
 using Advent_Of_Code_2024_.Net.Day11;
 using Advent_Of_Code_2024_.Net.Day12;
+using Advent_Of_Code_2024_.Net.Day13;
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
@@ -10,6 +11,7 @@ using Advent_Of_Code_2024_.Net.Day6;
 using Advent_Of_Code_2024_.Net.Day7;
 using Advent_Of_Code_2024_.Net.Day8;
 using Advent_Of_Code_2024_.Net.Day9;
+using Advent_Of_Code_2024_.Net.Helpers;
 
 namespace Advent_Of_Code_2024_.Net
 {
@@ -28,7 +30,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay9();
             //checkDay10();
             //checkDay11();
-            checkDay12();
+            //checkDay12();
+            checkDay13();
         }
 
         private static void checkDay1()
@@ -242,5 +245,34 @@ namespace Advent_Of_Code_2024_.Net
             result = GardenGroups.CalculateFenceCostSides(input);
             Console.WriteLine(result);
         }
+
+        private static void checkDay13()
+        {
+            var inputExample = new ClawContraptionInput("Day13/example_input.txt");
+            long resultExmaple = ClawContraption.GetTokensToPrices(inputExample.ClawMachines);
+            Console.WriteLine(resultExmaple);
+
+            var input = new ClawContraptionInput("Day13/input.txt");
+            long result = ClawContraption.GetTokensToPrices(input.ClawMachines);
+            Console.WriteLine(result);
+
+            var inputExample2 = new List<ClawMachine>();
+            foreach(ClawMachine machine in inputExample.ClawMachines)
+            {
+                inputExample2.Add(new ClawMachine(machine.ButtonA, machine.ButtonB, new GridPointLong(machine.Price.X + 10000000000000, machine.Price.Y + 10000000000000)));
+            }
+            long resultExmaple2 = ClawContraption.GetTokensToPrices(inputExample2);
+            Console.WriteLine(resultExmaple2);
+
+            var input2 = new List<ClawMachine>();
+            foreach (ClawMachine machine in input.ClawMachines)
+            {
+                input2.Add(new ClawMachine(machine.ButtonA, machine.ButtonB, new GridPointLong(machine.Price.X + 10000000000000, machine.Price.Y + 10000000000000)));
+            }
+            long result2 = ClawContraption.GetTokensToPrices(input2);
+            Console.WriteLine(result2);
+        }
+
+
     }
 }
