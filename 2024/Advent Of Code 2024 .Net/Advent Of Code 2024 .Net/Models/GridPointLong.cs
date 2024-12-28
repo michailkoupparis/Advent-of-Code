@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Advent_Of_Code_2024_.Net.EnumsConsts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Advent_Of_Code_2024_.Net.Helpers
+namespace Advent_Of_Code_2024_.Net.Models
 {
     public class GridPointLong
     {
@@ -43,10 +44,10 @@ namespace Advent_Of_Code_2024_.Net.Helpers
 
         public bool CheckAdjacent(GridPointLong GridPointLong)
         {
-            return (X == GridPointLong.X - 1 && Y == GridPointLong.Y) ||
-                   (X == GridPointLong.X + 1 && Y == GridPointLong.Y) ||
-                   (X == GridPointLong.X && Y == GridPointLong.Y - 1) ||
-                   (X == GridPointLong.X && Y == GridPointLong.Y + 1);
+            return X == GridPointLong.X - 1 && Y == GridPointLong.Y ||
+                   X == GridPointLong.X + 1 && Y == GridPointLong.Y ||
+                   X == GridPointLong.X && Y == GridPointLong.Y - 1 ||
+                   X == GridPointLong.X && Y == GridPointLong.Y + 1;
         }
 
 
@@ -81,7 +82,7 @@ namespace Advent_Of_Code_2024_.Net.Helpers
         {
             if (obj is GridPointLong other)
             {
-                return this.X == other.X && this.Y == other.Y;
+                return X == other.X && Y == other.Y;
             }
             return false;
         }

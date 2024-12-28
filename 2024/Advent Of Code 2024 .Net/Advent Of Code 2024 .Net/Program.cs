@@ -3,6 +3,7 @@ using Advent_Of_Code_2024_.Net.Day10;
 using Advent_Of_Code_2024_.Net.Day11;
 using Advent_Of_Code_2024_.Net.Day12;
 using Advent_Of_Code_2024_.Net.Day13;
+using Advent_Of_Code_2024_.Net.Day14;
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
@@ -12,6 +13,7 @@ using Advent_Of_Code_2024_.Net.Day7;
 using Advent_Of_Code_2024_.Net.Day8;
 using Advent_Of_Code_2024_.Net.Day9;
 using Advent_Of_Code_2024_.Net.Helpers;
+using Advent_Of_Code_2024_.Net.Models;
 
 namespace Advent_Of_Code_2024_.Net
 {
@@ -31,7 +33,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay10();
             //checkDay11();
             //checkDay12();
-            checkDay13();
+            //checkDay13();
+            checkDay14();
         }
 
         private static void checkDay1()
@@ -273,6 +276,24 @@ namespace Advent_Of_Code_2024_.Net
             Console.WriteLine(result2);
         }
 
+        private static void checkDay14()
+        {
+            var inputExample = new RestroomRedoubtInput("Day14/example_input.txt");
+            int resultExmaple = RestroomRedoubt.GetSafetyFactor(inputExample.Robots.ToArray().DeepCopyArray(), 11, 7, 100);
+            Console.WriteLine(resultExmaple);
 
+            var input = new RestroomRedoubtInput("Day14/input.txt");
+            int result = RestroomRedoubt.GetSafetyFactor(input.Robots.ToArray().DeepCopyArray(), 101, 103, 100);
+            Console.WriteLine(result);
+
+            //Dictionary<int, int> earliestXmasTree = RestroomRedoubt.GetEarliestXmasTree(inputExample.Robots.ToArray().DeepCopyArray(), 11, 7, 100000);
+            //Console.WriteLine(earliestXmasTree);
+
+            //var earliestXmasTree = RestroomRedoubt.GetEarliestXmasTree(input.Robots.ToArray().DeepCopyArray(), 101, 103, 19000);
+            //Console.WriteLine(earliestXmasTree[10403]);
+            //Console.WriteLine(earliestXmasTree);
+            var input2 = new RestroomRedoubtInput("Day14/input.txt");
+            RestroomRedoubt.GetEarliestXmasTreeVoid(input2.Robots.ToArray().DeepCopyArray(), 101, 103, 19000);
+        }
     }
 }

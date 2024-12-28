@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Advent_Of_Code_2024_.Net.Helpers
+namespace Advent_Of_Code_2024_.Net.Models
 {
     public class Button
     {

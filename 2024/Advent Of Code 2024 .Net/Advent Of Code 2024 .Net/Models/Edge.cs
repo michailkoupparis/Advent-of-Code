@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Advent_Of_Code_2024_.Net.EnumsConsts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Advent_Of_Code_2024_.Net.Helpers
+namespace Advent_Of_Code_2024_.Net.Models
 {
     internal class Edge
     {
@@ -81,7 +82,7 @@ namespace Advent_Of_Code_2024_.Net.Helpers
         {
             if (obj is Edge other)
             {
-                return this.StartingP == other.StartingP && this.EndingP == other.EndingP;
+                return StartingP == other.StartingP && EndingP == other.EndingP;
             }
             return false;
         }

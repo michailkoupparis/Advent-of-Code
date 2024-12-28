@@ -1,4 +1,4 @@
-﻿using Advent_Of_Code_2024_.Net.Helpers;
+﻿using Advent_Of_Code_2024_.Net.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,62 +65,6 @@ namespace Advent_Of_Code_2024_.Net.Day13
             var priorityQueue = new SortedSet<(int cost, GridPointLong point)>(
                 Comparer<(int cost, GridPointLong point)>.Create((a, b) =>
                 {
-                    // Compare by cost first
-                    int cmp = a.cost.CompareTo(b.cost);
-                    if (cmp != 0) return cmp;
-
-                    // If costs are equal, compare by Manhattan distance to the prize (maximize the distance)
-                    var distanceA = Math.Abs(a.point.X - clawMachine.Price.X) + Math.Abs(a.point.Y - clawMachine.Price.Y);
-                    var distanceB = Math.Abs(b.point.X - clawMachine.Price.X) + Math.Abs(b.point.Y - clawMachine.Price.Y);
-                    return distanceB.CompareTo(distanceA); // Want the further distance first (maximize)
-                }));
-
-            var visited = new HashSet<GridPointLong>();
-
-            // Add the start point (0, 0) with cost 0
-            priorityQueue.Add((0, new GridPointLong(0, 0)));
-
-            while (priorityQueue.Count > 0)
-            {
-                var (currentCost, currentPoint) = priorityQueue.First();
-                priorityQueue.Remove(priorityQueue.First());
-
-                // If we reached the price point, return the cost to reach it
-                if (currentPoint == clawMachine.Price)
-                    return currentCost;
-
-                if (visited.Contains(currentPoint))
-                    continue;
-                visited.Add(currentPoint);
-
-                // Explore Button A (move forward with Button A)
-                var nextPointA = clawMachine.ButtonA.GetNext(currentPoint);
-                if (nextPointA.X <= clawMachine.Price.X && nextPointA.Y <= clawMachine.Price.Y)
-                {
-                    var newStateA = (currentCost + BUTTON_A_COST, nextPointA);
-                    if (!visited.Contains(nextPointA))
-                        priorityQueue.Add(newStateA);
-                }
-
-                // Explore Button B (move forward with Button B)
-                var nextPointB = clawMachine.ButtonB.GetNext(currentPoint);
-                if (nextPointB.X <= clawMachine.Price.X && nextPointB.Y <= clawMachine.Price.Y)
-                {
-                    var newStateB = (currentCost + BUTTON_B_COST, nextPointB);
-                    if (!visited.Contains(nextPointB))
-                        priorityQueue.Add(newStateB);
-                }
-            }
-
-            return 0;  // If no path is found to the price, return 0
-        }
-
-        /*
-        private static long getTokensToPrice(ClawMachine clawMachine)
-        {
-            var priorityQueue = new SortedSet<(int cost, GridPointLong point)>(
-                Comparer<(int cost, GridPointLong point)>.Create((a, b) =>
-                {
                     int cmp = a.cost.CompareTo(b.cost);
                     if (cmp != 0) return cmp;
                     cmp = a.point.X.CompareTo(b.point.X);
@@ -165,6 +109,5 @@ namespace Advent_Of_Code_2024_.Net.Day13
 
             return 0;
         }
-        */
     }
 }

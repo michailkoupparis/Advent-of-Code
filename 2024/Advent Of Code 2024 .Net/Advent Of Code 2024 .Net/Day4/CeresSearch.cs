@@ -1,4 +1,4 @@
-﻿using Advent_Of_Code_2024_.Net.Helpers;
+﻿using Advent_Of_Code_2024_.Net.Models;
 using System.Xml;
 
 namespace Advent_Of_Code_2024_.Net.Day4

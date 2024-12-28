@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,17 @@ namespace Advent_Of_Code_2024_.Net.Helpers
                 }
             }
             return counter;
+        }
+
+        internal static T DeepCopy<T>(this T self)
+        {
+            var serialized = JsonConvert.SerializeObject(self);
+            return JsonConvert.DeserializeObject<T>(serialized);
+        }
+
+        internal static T[] DeepCopyArray<T>(this T[] array) where T : ICloneable
+        {
+            return array.Select(item => (T)item.Clone()).ToArray();
         }
     }
 }

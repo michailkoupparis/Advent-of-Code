@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Advent_Of_Code_2024_.Net.EnumsConsts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Advent_Of_Code_2024_.Net.Helpers
+namespace Advent_Of_Code_2024_.Net.Models
 {
+    [Serializable]
     public class GridPoint
     {
+        [DataMember]
         public int X { get; set; }
+        [DataMember]
         public int Y { get; set; }
 
         public GridPoint(int x, int y)
@@ -41,12 +46,28 @@ namespace Advent_Of_Code_2024_.Net.Helpers
                 && Y >= 0;
         }
 
+        public bool CheckGridBoundary(int Xdim, int Ydim)
+        {
+            return X <= Xdim
+                && X >= 0
+                && Y <= Ydim
+                && Y >= 0;
+        }
+
+        public bool CheckGridBoundary(int XdimMin, int XdimMax, int YdimMin, int YdimMax)
+        {
+            return X <= XdimMax
+                && X >= XdimMin
+                && Y <= YdimMax
+                && Y >= YdimMin;
+        }
+
         public bool CheckAdjacent(GridPoint gridPoint)
         {
-            return (X == gridPoint.X - 1 && Y == gridPoint.Y) ||
-                   (X == gridPoint.X + 1 && Y == gridPoint.Y) ||
-                   (X == gridPoint.X && Y == gridPoint.Y - 1) ||
-                   (X == gridPoint.X && Y == gridPoint.Y + 1);
+            return X == gridPoint.X - 1 && Y == gridPoint.Y ||
+                   X == gridPoint.X + 1 && Y == gridPoint.Y ||
+                   X == gridPoint.X && Y == gridPoint.Y - 1 ||
+                   X == gridPoint.X && Y == gridPoint.Y + 1;
         }
 
         public GridPoint[] GetAdjacent()
@@ -80,7 +101,7 @@ namespace Advent_Of_Code_2024_.Net.Helpers
         {
             if (obj is GridPoint other)
             {
-                return this.X == other.X && this.Y == other.Y;
+                return X == other.X && Y == other.Y;
             }
             return false;
         }

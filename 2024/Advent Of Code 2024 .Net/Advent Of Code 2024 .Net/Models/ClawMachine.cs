@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Advent_Of_Code_2024_.Net.Helpers
+namespace Advent_Of_Code_2024_.Net.Models
 {
     public class ClawMachine
     {
