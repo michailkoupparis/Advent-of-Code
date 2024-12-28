@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Advent_Of_Code_2024_.Net.EnumsConsts;
+using Advent_Of_Code_2024_.Net.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,13 +29,31 @@ namespace Advent_Of_Code_2024_.Net.Helpers
             return counter;
         }
 
-        internal static T DeepCopy<T>(this T self)
+        public static GridPoint GetNextLocation(GridPoint currLocation, char direction)
+        {
+
+            switch (direction)
+            {
+                case Consts.DIR_SYMBOL_UP:
+                    return new GridPoint(currLocation.X - 1, currLocation.Y);
+                case Consts.DIR_SYMBOL_RIGHT:
+                    return new GridPoint(currLocation.X, currLocation.Y + 1);
+                case Consts.DIR_SYMBOL_DOWN:
+                    return new GridPoint(currLocation.X + 1, currLocation.Y);
+                case Consts.DIR_SYMBOL_LEFT:
+                    return new GridPoint(currLocation.X, currLocation.Y - 1);
+                default:
+                    throw new ArgumentException($"Unknow direction {direction}");
+            }
+        }
+
+        public static T DeepCopy<T>(this T self)
         {
             var serialized = JsonConvert.SerializeObject(self);
             return JsonConvert.DeserializeObject<T>(serialized);
         }
 
-        internal static T[] DeepCopyArray<T>(this T[] array) where T : ICloneable
+        public static T[] DeepCopyArray<T>(this T[] array) where T : ICloneable
         {
             return array.Select(item => (T)item.Clone()).ToArray();
         }

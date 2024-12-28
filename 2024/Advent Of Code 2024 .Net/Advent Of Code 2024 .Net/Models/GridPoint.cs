@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 
 namespace Advent_Of_Code_2024_.Net.Models
 {
-    [Serializable]
     public class GridPoint
     {
-        [DataMember]
         public int X { get; set; }
-        [DataMember]
         public int Y { get; set; }
 
         public GridPoint(int x, int y)

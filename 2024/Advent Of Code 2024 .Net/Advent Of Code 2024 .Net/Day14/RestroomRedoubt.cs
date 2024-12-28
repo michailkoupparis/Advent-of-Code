@@ -79,7 +79,7 @@ namespace Advent_Of_Code_2024_.Net.Day14
                 int safety = GetSafetyFactor(robots, tilesWide, tilesTall, 1);
                 secondSafety.Add(i, safety);
 
-                if (i == 9876)
+                if (hasLongLineOfRobots(robots, tilesWide, tilesTall))
                 {
                     printGrid(robots, tilesWide, tilesTall);
                     Console.WriteLine($"--------------------------------------------------------------------------------------{i + 1}--------------------------------------------------------------------------------------");

@@ -1,4 +1,6 @@
-﻿using Advent_Of_Code_2024_.Net.Models;
+﻿using Advent_Of_Code_2024_.Net.EnumsConsts;
+using Advent_Of_Code_2024_.Net.Helpers;
+using Advent_Of_Code_2024_.Net.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,11 +12,6 @@ namespace Advent_Of_Code_2024_.Net.Day6
 {
     internal static class GuardGallivant
     {
-        private const char GUARD_SYMBOL_RIGHT = '>';
-        private const char GUARD_SYMBOL_LEFT = '<';
-        private const char GUARD_SYMBOL_UP = '^';
-        private const char GUARD_SYMBOL_DOWN = 'v';
-
         private const char OBSTACLE = '#';
         private const char PASSED = 'X';
 
@@ -36,7 +33,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
 
             while (true)
             {
-                GridPoint nextLocation = getNextLocation(guardLocation, guardDirection);
+                GridPoint nextLocation = HelperFunctions.GetNextLocation(guardLocation, guardDirection);
                 if (!nextLocation.CheckGridBoundary(room))
                 {
                     break;
@@ -93,7 +90,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
                 updatePassedPointsAndDirection(newLoopPoints, guardLocation, guardDirection);
                 while (true)
                 {
-                    GridPoint nextLocation = getNextLocation(guardLocation, guardDirection);
+                    GridPoint nextLocation = HelperFunctions.GetNextLocation(guardLocation, guardDirection);
                     if (!nextLocation.CheckGridBoundary(room))
                     {
                         break;
@@ -145,7 +142,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
             updatePassedPointsAndDirection(passedGridPoints, guardLocation, guardDirection);
             while (true)
             {
-                GridPoint nextLocation = getNextLocation(guardLocation, guardDirection);
+                GridPoint nextLocation = HelperFunctions.GetNextLocation(guardLocation, guardDirection);
                 if (!nextLocation.CheckGridBoundary(room))
                 {
                     break;
@@ -185,7 +182,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
             while (true)
             {
 
-                GridPoint nextLocation = getNextLocation(guardLocation, guardDirection);
+                GridPoint nextLocation = HelperFunctions.GetNextLocation(guardLocation, guardDirection);
                 if (!nextLocation.CheckGridBoundary(room))
                 {
                     break;
@@ -224,7 +221,7 @@ namespace Advent_Of_Code_2024_.Net.Day6
             char trialDirection = getNewDirection(direction);
             while (true)
             {
-                GridPoint trialPoint = getNextLocation(prevPoint, trialDirection);
+                GridPoint trialPoint = HelperFunctions.GetNextLocation(prevPoint, trialDirection);
                 if (!trialPoint.CheckGridBoundary(room))
                 {
                     break;
@@ -275,10 +272,10 @@ namespace Advent_Of_Code_2024_.Net.Day6
             {
                 for (int j = 0; j < room[i].Length; j++)
                 {
-                    if (room[i][j] == GUARD_SYMBOL_RIGHT
-                        | room[i][j] == GUARD_SYMBOL_LEFT
-                        | room[i][j] == GUARD_SYMBOL_DOWN
-                        | room[i][j] == GUARD_SYMBOL_UP
+                    if (room[i][j] == Consts.DIR_SYMBOL_RIGHT
+                        | room[i][j] == Consts.DIR_SYMBOL_LEFT
+                        | room[i][j] == Consts.DIR_SYMBOL_DOWN
+                        | room[i][j] == Consts.DIR_SYMBOL_UP
                         )
                     {
                         return new GridPoint(i, j);
@@ -289,43 +286,21 @@ namespace Advent_Of_Code_2024_.Net.Day6
             return null;
         }
 
-        private static GridPoint getNextLocation(GridPoint currLocation, char direction)
-        {
-
-            switch (direction)
-            {
-                case GUARD_SYMBOL_UP:
-                    return new GridPoint(currLocation.X - 1, currLocation.Y);
-                case GUARD_SYMBOL_RIGHT:
-                    return new GridPoint(currLocation.X, currLocation.Y + 1);
-                case GUARD_SYMBOL_DOWN:
-                    return new GridPoint(currLocation.X + 1, currLocation.Y);
-                case GUARD_SYMBOL_LEFT:
-                    return new GridPoint(currLocation.X, currLocation.Y - 1);
-                default:
-                    throw new ArgumentException($"Unknow direction {direction}");
-            }
-
-            return null;
-        }
-
         private static char getNewDirection(char direction)
         {
             switch (direction)
             {
-                case GUARD_SYMBOL_UP:
-                    return GUARD_SYMBOL_RIGHT;
-                case GUARD_SYMBOL_RIGHT:
-                    return GUARD_SYMBOL_DOWN;
-                case GUARD_SYMBOL_DOWN:
-                    return GUARD_SYMBOL_LEFT;
-                case GUARD_SYMBOL_LEFT:
-                    return GUARD_SYMBOL_UP;
+                case Consts.DIR_SYMBOL_UP:
+                    return Consts.DIR_SYMBOL_RIGHT;
+                case Consts.DIR_SYMBOL_RIGHT:
+                    return Consts.DIR_SYMBOL_DOWN;
+                case Consts.DIR_SYMBOL_DOWN:
+                    return Consts.DIR_SYMBOL_LEFT;
+                case Consts.DIR_SYMBOL_LEFT:
+                    return Consts.DIR_SYMBOL_UP;
                 default:
                     throw new ArgumentException($"Unknow direction {direction}");
             }
-
-            return ' ';
         }
 
         private static int countSymbol(string[] room, char symbol)

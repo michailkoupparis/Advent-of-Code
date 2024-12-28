@@ -4,6 +4,7 @@ using Advent_Of_Code_2024_.Net.Day11;
 using Advent_Of_Code_2024_.Net.Day12;
 using Advent_Of_Code_2024_.Net.Day13;
 using Advent_Of_Code_2024_.Net.Day14;
+using Advent_Of_Code_2024_.Net.Day15;
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
@@ -34,7 +35,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay11();
             //checkDay12();
             //checkDay13();
-            checkDay14();
+            //checkDay14();
+            checkDay15();
         }
 
         private static void checkDay1()
@@ -295,5 +297,25 @@ namespace Advent_Of_Code_2024_.Net
             var input2 = new RestroomRedoubtInput("Day14/input.txt");
             RestroomRedoubt.GetEarliestXmasTreeVoid(input2.Robots.ToArray().DeepCopyArray(), 101, 103, 19000);
         }
+
+        private static void checkDay15()
+        {
+            var inputExample = new WarehouseWoesInput("Day15/example_input.txt");
+            int resultExmaple = WarehouseWoes.GetBoxesGpsLocations(inputExample.Warehouse, inputExample.RobotMovements);
+            Console.WriteLine(resultExmaple);
+
+            var input = new WarehouseWoesInput("Day15/input.txt");
+            int result = WarehouseWoes.GetBoxesGpsLocations(input.Warehouse, input.RobotMovements);
+            Console.WriteLine(result);
+
+            var exampleWareHouseSize2 = inputExample.GetDoubleThWarehouse();
+            int resultExmapleSize2 = WarehouseWoes.GetBoxesGpsLocationsDoubleWarehouse(exampleWareHouseSize2, inputExample.RobotMovements);
+            Console.WriteLine(resultExmapleSize2);
+
+            var inputWarehouseSize2 = input.GetDoubleThWarehouse();
+            int resultSize2 = WarehouseWoes.GetBoxesGpsLocationsDoubleWarehouse(inputWarehouseSize2, input.RobotMovements);
+            Console.WriteLine(resultSize2);
+        }
+
     }
 }
