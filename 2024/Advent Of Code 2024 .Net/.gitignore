@@ -38,5 +38,4 @@
 appsettings.json
 
 #Ignore inputs
-*input.txt
-*example_input.txt
+*input*.txt

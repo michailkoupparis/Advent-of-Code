@@ -5,6 +5,7 @@ using Advent_Of_Code_2024_.Net.Day12;
 using Advent_Of_Code_2024_.Net.Day13;
 using Advent_Of_Code_2024_.Net.Day14;
 using Advent_Of_Code_2024_.Net.Day15;
+using Advent_Of_Code_2024_.Net.Day16;
 using Advent_Of_Code_2024_.Net.Day2;
 using Advent_Of_Code_2024_.Net.Day3;
 using Advent_Of_Code_2024_.Net.Day4;
@@ -36,7 +37,8 @@ namespace Advent_Of_Code_2024_.Net
             //checkDay12();
             //checkDay13();
             //checkDay14();
-            checkDay15();
+            //checkDay15();
+            checkDay16();
         }
 
         private static void checkDay1()
@@ -315,6 +317,21 @@ namespace Advent_Of_Code_2024_.Net
             var inputWarehouseSize2 = input.GetDoubleThWarehouse();
             int resultSize2 = WarehouseWoes.GetBoxesGpsLocationsDoubleWarehouse(inputWarehouseSize2, input.RobotMovements);
             Console.WriteLine(resultSize2);
+        }
+
+        private static void checkDay16()
+        {
+            var inputExample = new ReindeerMazeInput("Day16/example_input.txt");
+            int resultExmaple = ReindeerMaze.GetMazeShortestPath(inputExample.Maze);
+            Console.WriteLine(resultExmaple);
+
+            var inputExample2 = new ReindeerMazeInput("Day16/example_input2.txt");
+            int resultExmaple2 = ReindeerMaze.GetMazeShortestPath(inputExample2.Maze);
+            Console.WriteLine(resultExmaple2);
+
+            var input = new ReindeerMazeInput("Day16/input.txt");
+            int result = ReindeerMaze.GetMazeShortestPath(input.Maze);
+            Console.WriteLine(result);
         }
 
     }
