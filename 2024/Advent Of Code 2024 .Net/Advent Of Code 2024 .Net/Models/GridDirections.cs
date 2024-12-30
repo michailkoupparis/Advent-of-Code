@@ -27,17 +27,22 @@ namespace Advent_Of_Code_2024_.Net.Models
 
         public char Get90deegrees(int id)
         {
-            return Directions[(id + 1) % 4];
+            return Directions[normalizeId(id + 1)];
         }
 
         public char Get90deegreesAntiClockWise(int id)
         {
-            return Directions[(id - 1) % 4];
+            return Directions[normalizeId(id - 1)];
         }
 
         public char Get180deegrees(int id)
         {
-            return Directions[(id + 2) % 4];
+            return Directions[normalizeId(id + 2)];
+        }
+
+        private int normalizeId(int id)
+        {
+            return (id % 4 + 4) % 4;
         }
     }
 }

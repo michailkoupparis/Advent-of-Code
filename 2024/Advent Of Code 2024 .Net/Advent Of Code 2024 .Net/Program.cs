@@ -322,15 +322,24 @@ namespace Advent_Of_Code_2024_.Net
         private static void checkDay16()
         {
             var inputExample = new ReindeerMazeInput("Day16/example_input.txt");
-            int resultExmaple = ReindeerMaze.GetMazeShortestPath(inputExample.Maze);
+            int resultExmaple = ReindeerMaze.GetMazeShortestPathCost(inputExample.Maze);
             Console.WriteLine(resultExmaple);
 
             var inputExample2 = new ReindeerMazeInput("Day16/example_input2.txt");
-            int resultExmaple2 = ReindeerMaze.GetMazeShortestPath(inputExample2.Maze);
+            int resultExmaple2 = ReindeerMaze.GetMazeShortestPathCost(inputExample2.Maze);
             Console.WriteLine(resultExmaple2);
 
             var input = new ReindeerMazeInput("Day16/input.txt");
-            int result = ReindeerMaze.GetMazeShortestPath(input.Maze);
+            int result = ReindeerMaze.GetMazeShortestPathCost(input.Maze);
+            Console.WriteLine(result);
+
+            resultExmaple = ReindeerMaze.GetMazeShortestPath(inputExample.Maze);
+            Console.WriteLine(resultExmaple);
+
+            resultExmaple2 = ReindeerMaze.GetMazeShortestPath(inputExample2.Maze);
+            Console.WriteLine(resultExmaple2);
+
+            result = ReindeerMaze.GetMazeShortestPath(input.Maze);
             Console.WriteLine(result);
         }
 
